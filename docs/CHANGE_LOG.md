@@ -7,6 +7,24 @@ Format enforced by `.claude/rules/changelog.md`.
 
 ## Changes
 
+### Task 2 — Backend scaffold and initial database migration
+- **Time:** 2026-04-10T10:45:00
+- **Type:** `feat`
+- **Summary:**
+  - **Before:** No backend directory. No database schema.
+  - **After:** Express backend scaffolded in `backend/`. `pg` installed for Supabase/PostgreSQL. Migration `001_initial.sql` creates `payment_links` table (id, token, pin_hash, payment_type, amount, currency, created_at). `migrate.js` runner tracks applied migrations via `_migrations` table (idempotent). `npm run migrate` applies all pending migrations. 5 Jest tests verify schema — all green.
+
+---
+
+### Task 1 — Frontend UI with locale support and PIN input
+- **Time:** 2026-04-10T10:00:00
+- **Type:** `feat`
+- **Summary:**
+  - **Before:** No frontend existed. Project had only docs and config files.
+  - **After:** Scaffolded Vue 3 + Vite + TypeScript SPA in `frontend/`. Built `LocaleSelector`, `PaymentMethodSelector`, `AmountInput`, and `PinInput` components with full locale-awareness (AU/US/ID). `CreatePaymentLink` view composes all components with a card layout, blue CTA, and SECURE badge. 20 Vitest tests covering all components pass. Vitest 2.x pinned for Node 21 compatibility.
+
+---
+
 ### Update security flow to sender-entered 6-digit PIN
 - **Time:** 2026-04-10T09:00:00
 - **Type:** `feat`

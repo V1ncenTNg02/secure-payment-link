@@ -5,6 +5,18 @@ Format and update enforcement: `.claude/rules/decisions.md`.
 
 ---
 
+### ADR-008: PostgreSQL via Supabase instead of SQLite
+- **Time:** 2026-04-10T10:45:00
+- **Status:** `Accepted`
+- **Context:** BRD specified SQLite (better-sqlite3) for zero-config local dev. During Task 2, the user already had a Supabase project with credentials in `.env`. Using Supabase avoids running a local DB process and keeps the dev setup closer to production.
+- **Decision:** Replace SQLite with Supabase PostgreSQL. Use `pg` (node-postgres) with the transaction pooler (port 6543) and `ssl: { rejectUnauthorized: false }`. Connection params loaded from `.env`. The transaction pooler requires no session-level prepared statements.
+- **Alternatives Considered:**
+  - **SQLite (better-sqlite3)** — zero external deps, sync API; rejected because user already has Supabase and wanted to use it
+  - **Direct connection (port 5432)** — resolves to IPv6 only on this Supabase project, not reachable from the dev machine; rejected in favour of the IPv4-accessible transaction pooler
+- **Consequences:** `npm run migrate` must run before tests and before first server start. Tests hit the real Supabase DB (no in-memory option with Postgres); migrations are idempotent so re-runs are safe.
+
+---
+
 ### ADR-007: Test-Driven Development as Mandatory Workflow
 - **Time:** 2026-04-10T09:00:00
 - **Status:** `Accepted`

@@ -5,7 +5,7 @@ Secure payment link generator where users create shareable one-time payment link
 
 - **Frontend**: Vue 3 + Vite (SPA, port 5173)
 - **Backend**: Node.js + Express REST API (port 3000)
-- **Database**: SQLite via better-sqlite3
+- **Database**: PostgreSQL via Supabase (transaction pooler, port 6543)
 - **Testing**: Vitest (frontend) + Jest/Supertest (backend)
 
 ## Repository Structure
@@ -38,7 +38,7 @@ cd backend && npm run test        # Jest + Supertest integration tests
 ```
 
 ## Architecture Decisions
-- SQLite keeps dev setup zero-config (single `.db` file)
+- PostgreSQL via Supabase transaction pooler (port 6543) — `pg` package with `ssl: { rejectUnauthorized: false }`
 - Payment links identified by UUID v4 (the shareable token)
 - Sender enters a 6-digit numeric PIN at create time; backend hashes it with SHA-256 (token as salt) and stores `pin_hash` — plain PIN never persisted
 - Claim tracking uses `claimed_at DATETIME NULL` (null = unclaimed)
@@ -60,7 +60,7 @@ cd backend && npm run test        # Jest + Supertest integration tests
 - **MITM protection**: Sender enters a 6-digit numeric PIN when creating the link and communicates it to the recipient verbally over the phone. Claim requires PIN entry; backend hashes submitted PIN and compares with stored `pin_hash` (see ADR-006 in `docs/DECISIONS.md`)
 
 ## Testing Conventions
-- Backend tests hit a real in-memory or test SQLite DB — no mocks for DB layer
+- Backend tests hit the real Supabase DB — no mocks for DB layer (migrations are idempotent, safe to re-run)
 - Run migrations before each test suite
 - Test both happy path and edge cases: already-claimed links, invalid tokens, bad amounts
 
