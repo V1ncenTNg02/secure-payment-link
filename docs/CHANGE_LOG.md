@@ -7,6 +7,15 @@ Format enforced by `.claude/rules/changelog.md`.
 
 ## Changes
 
+### Task 5 — Claim tracking: migration, API endpoints, and ClaimPaymentLink view
+- **Time:** 2026-04-10T11:30:00
+- **Type:** `feat`
+- **Summary:**
+  - **Before:** No `claimed_at` column. No routes for reading or claiming a payment link. No claim UI.
+  - **After:** `002_claim_tracking.sql` adds `claimed_at TIMESTAMPTZ NULL` to `payment_links`. `GET /api/v1/payment-links/:token` returns token, payment_type, amount, currency, claimed_at — never pin_hash; returns 404 for unknown token. `POST /api/v1/payment-links/:token/claim` validates PIN with Zod, hashes it SHA-256(pin+token), compares with stored hash → 200 + sets `claimed_at = NOW()` on match; 403 for wrong PIN; 409 if already claimed; 404 for unknown token. `console.debug('[PaymentLink:claim]', { token })` fires on success. Frontend: `getPaymentLink` + `claimPaymentLink` added to `paymentLinks.ts` with typed interfaces; `ClaimPaymentLink.vue` fetches link on mount, shows amount/currency/payment_type, PIN input, "Claim Payment" button, and handles success/403/409/404 states. Vue Router installed; router with `/` → CreatePaymentLink and `/pay/:token` → ClaimPaymentLink; `App.vue` switched to `<RouterView>`. 19 backend + 38 frontend tests — all green (57 total).
+
+---
+
 ### Task 3 — API create endpoint and frontend integration
 - **Time:** 2026-04-10T10:50:00
 - **Type:** `feat`
