@@ -1,0 +1,14 @@
+# Environment
+.env
+
+# Dependencies
+node_modules/
+
+# Build output
+frontend/dist/
+
+# Database
+backend/db/*.db
+
+# Editor
+.DS_Store

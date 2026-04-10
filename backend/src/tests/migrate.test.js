@@ -3,9 +3,6 @@
  * Written BEFORE migrate.js and db/index.js exist (Red phase).
  * These tests verify that running the migration creates the expected schema.
  */
-const path = require('path')
-require('dotenv').config({ path: path.join(__dirname, '../../../.env') })
-
 const { runMigrations } = require('../db/migrate')
 const { pool } = require('../db/index')
 

@@ -23,3 +23,28 @@ Answer the following questions:
 2. Add a rule to enforce test driven development workflow. Tests should be written before any code is developed.
 
 3. update the files to make the flow as: when the person makes a payment, he needs to enter a one-time 6 digits pin, then the link will be genereated. When the receiver wants to accept the payment with the link, he needs to enter the pin (which should be told over the phone)
+
+# Prompt 4: 
+Help me check if the DB migration rule has been set so when there is a change on the DB Side, write a sql file like 000_db_change_name.sql
+
+# Prompt 5:
+Now help me build the app step by step, stop every time one task is finished. Ask me if you have any questions or something want me to clarify, one at a time
+
+# Prompt 6:
+it is in the env file with below attributes
+
+DATABASE_URL=postgresql://postgres.tikgcymimmlmvaxnzisy:..@aws-1-ap-southeast-2.pooler.supabase.com:6543/postgres
+
+DB_HOST=aws-1-ap-southeast-2.pooler.supabase.com
+DB_PORT=6543
+DB_NAME=postgres
+DB_USER=postgres.tikgcymimmlmvaxnzisy
+DB_PASSWORD=...
+
+# Prompt 7: 
+
+please help me to do the next task
+
+# Prompt 8:
+
+Please do task 5 first and then do task 4

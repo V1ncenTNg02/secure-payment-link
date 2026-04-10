@@ -8,23 +8,38 @@ paths:
 
 # Database Rules
 
-## Migration Conventions
-- Migration files live in `backend/src/db/migrations/`
-- Named with zero-padded sequence prefix: `001_initial.sql`, `002_claim_tracking.sql`
-- **Never modify an existing migration file** — always create a new forward migration
-- Each migration file must be idempotent: use `CREATE TABLE IF NOT EXISTS`, `ALTER TABLE ... ADD COLUMN IF NOT EXISTS`
-- The migration runner (`migrate.js`) tracks applied migrations in a `_migrations` meta-table
+## MANDATORY: Every Schema Change Requires a Migration File
+
+You are NOT allowed to write any code that alters the database schema (CREATE TABLE,
+ALTER TABLE, DROP TABLE, ADD COLUMN, rename column, change type) unless a corresponding
+`.sql` migration file already exists for that change.
+
+**Do not touch application code first. Write the migration file first.**
+
+### Migration File Naming
+```
+backend/src/db/migrations/NNN_descriptive_name.sql
+```
+- `NNN` = zero-padded sequence number, incrementing from the last migration (`001`, `002`, `003` …)
+- `descriptive_name` = snake_case summary of the change (e.g. `add_pin_hash_column`, `create_payment_links`)
+- Examples: `001_initial.sql`, `002_claim_tracking.sql`, `003_add_pin_hash.sql`
+
+### Required Workflow
+1. **Identify** the schema change needed
+2. **Create** `backend/src/db/migrations/NNN_change_name.sql` with the SQL
+3. **Make it idempotent**: use `CREATE TABLE IF NOT EXISTS`, `ADD COLUMN IF NOT EXISTS`
+4. **Verify** it applies cleanly: `npm run migrate`
+5. **Then** write the application code that uses the new schema
+6. Update `docs/DECISIONS.md` if this reflects an architectural decision
+7. Update `docs/CHANGE_LOG.md` with a `migration` type entry
+
+**Never modify an existing migration file. Always create a new forward migration.**
+The migration runner tracks applied files in `_migrations` — modifying an applied file has no effect and causes drift.
 
 ## Query Safety
 - **All queries must be parameterized** — `db.prepare('SELECT * FROM t WHERE id = ?').get(id)`
 - Never concatenate user input into SQL strings
 - Use `better-sqlite3` synchronous API — no `.then()` chains on DB calls
-
-## Schema Change Process
-1. Write a new numbered migration SQL file
-2. Test it runs cleanly on a fresh DB: `npm run migrate`
-3. Update `docs/DECISIONS.md` if the schema change reflects an architectural decision
-4. Update `docs/CHANGE_LOG.md` with the schema change entry
 
 ## Connection Management
 - Single DB connection singleton exported from `backend/src/db/index.js`
