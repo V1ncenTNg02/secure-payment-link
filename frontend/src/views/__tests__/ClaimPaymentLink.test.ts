@@ -34,6 +34,13 @@ beforeEach(() => {
   mockClaimPaymentLink.mockReset()
 })
 
+async function fillPin(wrapper: ReturnType<typeof mount>, pin: string) {
+  const boxes = wrapper.findAll('input[inputmode="numeric"]')
+  for (let i = 0; i < 6; i++) {
+    await boxes[i].setValue(pin[i] ?? '')
+  }
+}
+
 describe('ClaimPaymentLink', () => {
   it('shows loading state before data arrives', async () => {
     mockGetPaymentLink.mockReturnValue(new Promise(() => {})) // never resolves
@@ -68,7 +75,7 @@ describe('ClaimPaymentLink', () => {
     const wrapper = mount(ClaimPaymentLink)
     await flushPromises()
 
-    await wrapper.find('input[type="text"], input[inputmode="numeric"]').setValue('482916')
+    await fillPin(wrapper, '482916')
     await wrapper.find('button[type="button"]').trigger('click')
     await flushPromises()
 
@@ -82,7 +89,7 @@ describe('ClaimPaymentLink', () => {
     const wrapper = mount(ClaimPaymentLink)
     await flushPromises()
 
-    await wrapper.find('input[type="text"], input[inputmode="numeric"]').setValue('000000')
+    await fillPin(wrapper, '000000')
     await wrapper.find('button[type="button"]').trigger('click')
     await flushPromises()
 
@@ -96,7 +103,7 @@ describe('ClaimPaymentLink', () => {
     const wrapper = mount(ClaimPaymentLink)
     await flushPromises()
 
-    await wrapper.find('input[type="text"], input[inputmode="numeric"]').setValue('482916')
+    await fillPin(wrapper, '482916')
     await wrapper.find('button[type="button"]').trigger('click')
     await flushPromises()
 

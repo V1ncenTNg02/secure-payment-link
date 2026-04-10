@@ -9,7 +9,7 @@ const router = express.Router()
 const createSchema = z.object({
   payment_type: z.enum(['credit_card', 'bank']),
   amount: z.number().positive(),
-  currency: z.enum(['AUD', 'USD', 'IDR']),
+  currency: z.enum(['AUD', 'USD', 'GBP', 'EUR', 'CAD', 'SGD', 'JPY', 'IDR']),
   pin: z.string().regex(/^\d{6}$/, 'PIN must be exactly 6 digits'),
 })
 

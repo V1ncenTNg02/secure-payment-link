@@ -19,6 +19,7 @@ const emit = defineEmits<{ 'update:modelValue': [value: PaymentMethod] }>()
       <span class="icon">💳</span>
       {{ creditCardLabel }}
     </button>
+
     <button
       :class="['method-btn', { active: modelValue === 'bank' }]"
       type="button"
@@ -27,39 +28,42 @@ const emit = defineEmits<{ 'update:modelValue': [value: PaymentMethod] }>()
       <span class="icon">🏦</span>
       {{ bankLabel }}
     </button>
+
   </div>
 </template>
 
 <style scoped>
 .payment-methods {
   display: flex;
-  gap: 12px;
+  gap: 10px;
 }
 .method-btn {
   flex: 1;
-  padding: 14px 8px;
-  border: 2px solid #e2e8f0;
-  border-radius: 10px;
-  background: white;
+  padding: 12px 6px;
+  border: 2px solid #c8c8c1;
+  border-radius: 16px;
+  background: #fff;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  transition: all 0.15s;
-  color: #374151;
-}
-.method-btn.active {
-  border-color: #3b82f6;
-  background: #eff6ff;
-  color: #1d4ed8;
+  gap: 5px;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+  color: #62625b;
 }
 .method-btn:hover:not(.active) {
-  border-color: #94a3b8;
+  border-color: #91918c;
+  background: #f6f6f3;
+}
+.method-btn.active {
+  border-color: #435ee5;
+  background: #eef1fd;
+  color: #211922;
 }
 .icon {
-  font-size: 22px;
+  font-size: 20px;
+  line-height: 1;
 }
 </style>

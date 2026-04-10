@@ -25,30 +25,33 @@ const emit = defineEmits<{ 'update:modelValue': [value: string] }>()
 .amount-wrapper {
   display: flex;
   align-items: stretch;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
+  border: 1px solid #91918c;
+  border-radius: 16px;
   overflow: hidden;
-  background: white;
+  background: #fff;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
 .amount-wrapper:focus-within {
-  border-color: #3b82f6;
+  border-color: #435ee5;
+  box-shadow: 0 0 0 3px rgba(67, 94, 229, 0.12);
 }
 .symbol {
   padding: 0 14px;
   font-weight: 600;
-  color: #64748b;
-  background: #f8fafc;
-  border-right: 1px solid #e2e8f0;
+  color: #91918c;
+  background: #f6f6f3;
+  border-right: 1px solid #c8c8c1;
   display: flex;
   align-items: center;
   font-size: 15px;
 }
 input {
   flex: 1;
-  padding: 12px;
+  padding: 11px 14px;
   border: none;
   outline: none;
-  font-size: 16px;
+  font-size: 15px;
+  color: #211922;
   background: transparent;
 }
 input::-webkit-outer-spin-button,

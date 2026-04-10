@@ -21,10 +21,8 @@ describe('PaymentMethodSelector', () => {
     const wrapper = mount(PaymentMethodSelector, {
       props: { modelValue: 'bank', creditCardLabel: 'Credit Card', bankLabel: 'Bank' },
     })
-    const buttons = wrapper.findAll('button')
-    const creditBtn = buttons.find(b => b.text().includes('Credit Card'))
+    const creditBtn = wrapper.findAll('button').find(b => b.text().includes('Credit Card'))
     await creditBtn!.trigger('click')
-    expect(wrapper.emitted('update:modelValue')).toBeTruthy()
     expect(wrapper.emitted('update:modelValue')![0]).toEqual(['credit_card'])
   })
 
@@ -32,10 +30,8 @@ describe('PaymentMethodSelector', () => {
     const wrapper = mount(PaymentMethodSelector, {
       props: { modelValue: 'credit_card', creditCardLabel: 'Credit Card', bankLabel: 'Bank' },
     })
-    const buttons = wrapper.findAll('button')
-    const bankBtn = buttons.find(b => b.text().includes('Bank'))
+    const bankBtn = wrapper.findAll('button').find(b => b.classes().includes('method-btn') && !b.classes().includes('method-btn--apple') && b.text().includes('Bank'))
     await bankBtn!.trigger('click')
-    expect(wrapper.emitted('update:modelValue')).toBeTruthy()
     expect(wrapper.emitted('update:modelValue')![0]).toEqual(['bank'])
   })
 
@@ -43,8 +39,8 @@ describe('PaymentMethodSelector', () => {
     const wrapper = mount(PaymentMethodSelector, {
       props: { modelValue: 'credit_card', creditCardLabel: 'Credit Card', bankLabel: 'Bank' },
     })
-    const buttons = wrapper.findAll('button')
-    const creditBtn = buttons.find(b => b.text().includes('Credit Card'))
+    const creditBtn = wrapper.findAll('button').find(b => b.text().includes('Credit Card'))
     expect(creditBtn!.classes()).toContain('active')
   })
+
 })

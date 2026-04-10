@@ -52,3 +52,19 @@ Please do task 5 first and then do task 4
 # Prompt 9:
 
 Do task 6 please
+
+# Prompt 10: 
+
+Help me revise the frontend to align with the design style, and update the component in following steps: 1. When card is selected, add fields to capture card number, Expire date, and CVC; if bank transfer is selected, capture Account Number and BSB; add one more option for Apple Pay, if Apple pay is selected, show a button showing Apple Pay. 2. add more regions in the region selection, 3.Remove the pin placeholder, and change the input field to 6 continous blank squares, like the OTP design.
+
+# Prompt 11: 
+
+Help me change the Red color for the border of payment method selection, mask, and generate link button to focus blue and link blue in the design file. 
+
+and fix two issues for me: 1. center the Pin input field 2. Once I type a number in the first block, the pointer should jump to the next block
+
+# Prompt 12:
+Remove the third payment option
+
+# Prompt 13:
+once the generate link button is clicked, show two options 1. Copy link 2. Send link to an email address, and put a email input field besides it. Once the send button is clicked, show: Link sent successfully! No need to implement the send functionality, just implement the UI.

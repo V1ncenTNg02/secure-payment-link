@@ -7,6 +7,34 @@ Update enforced by `.claude/rules/changelog.md`.
 
 ## Changes
 
+### Remove Apple Pay payment option
+- **Time:** 2026-04-10T12:19:50
+- **Type:** `feat`
+- **Summary:**
+  - **Before:** Three payment methods: `credit_card`, `bank`, `apple_pay`. Apple Pay button in `PaymentMethodSelector`, conditional Apple Pay panel in `CreatePaymentLink`, `apple_pay` in backend Zod enum.
+  - **After:** Two payment methods: `credit_card`, `bank`. Removed Apple Pay button, panel, CSS, type union value, and backend enum entry. Three tests removed from `PaymentMethodSelector.test.ts`.
+
+### UI — Blue theme, centered PIN, auto-advance fix
+- **Time:** 2026-04-10T12:12:30
+- **Type:** `feat`
+- **Summary:**
+  - **Before:** Active payment method border `#e60023` (red); generate button `#e60023`; AmountInput focus border `#3b82f6` (mismatched); PIN row left-aligned; auto-advance failed silently due to `onFocus` guard reading stale `modelValue` before nextTick.
+  - **After:** (1) `PaymentMethodSelector.vue` — active border/bg → Focus Blue `#435ee5` / `#eef1fd`. (2) `CreatePaymentLink.vue` — generate button → Link Blue `#2b48d4`, hover `#1e36b8`. (3) `AmountInput.vue` — border/focus/symbol colors aligned to Pinterest tokens (`#91918c`, `#435ee5`, `#f6f6f3`); border-radius 16px. (4) `PinInput.vue` — `otp-row` centered via `justify-content: center`; `onInput` awaits `nextTick()` before `focus(i+1)` so `onFocus` guard sees the updated `modelValue`; `caret-color` → `#435ee5`.
+
+### Frontend redesign — OTP PIN, Apple Pay, 8 locales
+- **Time:** 2026-04-10T12:06:30
+- **Type:** `feat`
+- **Summary:**
+  - **Before:** Single text PIN input; 3 locales (AU, US, ID); no Apple Pay; no conditional payment method fields.
+  - **After:** (1) `locales.ts` — 8 locales (AU, US, GB, EU, CA, SG, JP, ID), `apple_pay` PaymentMethod, full Currency type, `bankCodeLabel`/`bankCodePlaceholder` per locale. (2) `PinInput.vue` — 6 OTP-style individual boxes with auto-advance/retreat and paste support. (3) `PaymentMethodSelector.vue` — Apple Pay third option with black active styling. (4) `CreatePaymentLink.vue` — Pinterest design (fog bg, plum text, red CTA) with conditional fields: credit card → card/expiry/CVC, bank → locale-specific bank code + account number, Apple Pay → info panel. (5) `paymentLinks.ts` — imports `PaymentMethod`/`Currency` from `locales.ts` instead of hardcoded strings. (6) Backend `createSchema` Zod — accepts `apple_pay` and all 8 currencies.
+
+### ClaimPaymentLink test — OTP PIN fix
+- **Time:** 2026-04-10T12:06:30
+- **Type:** `test`
+- **Summary:**
+  - **Before:** Tests set PIN with `wrapper.find('input[inputmode="numeric"]').setValue('482916')` — would only extract last digit via OTP handler.
+  - **After:** `fillPin` helper fills each of the 6 OTP boxes individually with `boxes[i].setValue(pin[i])`, matching actual PinInput behaviour.
+
 ### Task 6 — Debug console logging and screenshot
 - **Time:** 2026-04-10T11:25:00
 - **Type:** `feat`

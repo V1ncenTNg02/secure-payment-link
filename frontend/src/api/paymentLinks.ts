@@ -1,9 +1,11 @@
+import type { PaymentMethod, Currency } from '../config/locales'
+
 const BASE = 'http://localhost:3000/api/v1/payment-links'
 
 export interface CreatePaymentLinkPayload {
-  payment_type: 'credit_card' | 'bank'
+  payment_type: PaymentMethod
   amount: number
-  currency: 'AUD' | 'USD' | 'IDR'
+  currency: Currency
   pin: string
 }
 
@@ -14,9 +16,9 @@ export interface CreatePaymentLinkResult {
 
 export interface PaymentLinkDetails {
   token: string
-  payment_type: 'credit_card' | 'bank'
+  payment_type: PaymentMethod
   amount: number
-  currency: 'AUD' | 'USD' | 'IDR'
+  currency: Currency
   claimed_at: string | null
 }
 
