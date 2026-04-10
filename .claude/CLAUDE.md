@@ -66,8 +66,8 @@ cd backend && npm run test        # Jest + Supertest integration tests
 
 ## Rule Files
 Rules are organized by scope under `.claude/`:
-- **Universal** (always apply): `.claude/rules/` — engineering-principles, naming-and-style, testing-standards, security-baseline, backward-compatibility, changelog, tdd
-- **Framework-specific**: `.claude/framework-rules/express/rules.md`, `framework-rules/vue/rules.md`, `framework-rules/sqlite/rules.md`, `framework-rules/terraform/rules.md`
+- **Universal** (always apply): `.claude/rules/` — engineering-principles, naming-and-style, testing-standards, security-baseline, backward-compatibility, changelog
+- **Framework-specific**: `.claude/framework-rules/express/rules.md`, `framework-rules/vue/rules.md`
 - **Domain skills**: `.claude/skills/backend/security-review/SKILL.md` — PIN hashing, claim validation
 
 ## Mandatory Documentation (Enforced by Rules)

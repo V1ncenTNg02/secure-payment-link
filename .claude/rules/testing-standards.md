@@ -1,3 +1,15 @@
+---
+paths:
+  - "**/*.test.ts"
+  - "**/*.test.js"
+  - "**/*.spec.ts"
+  - "**/*.spec.js"
+  - "backend/src/**/*.ts"
+  - "backend/src/**/*.js"
+  - "frontend/src/**/*.ts"
+  - "frontend/src/**/*.vue"
+---
+
 # Testing Standards
 
 Distilled from: *Clean Architecture* (Martin), *PEAA* (Fowler)
@@ -106,3 +118,52 @@ Prefer **fakes** for infrastructure (in-memory repository) and **stubs** for ext
 - For functions with a large input space (parsers, validators, encoders, mathematical operations), use **property-based testing** to generate hundreds of random inputs.
 - Define properties that must always hold: `encode(decode(x)) === x`, `sorted list is always ascending`, `total with discount ≤ total without discount`.
 - Tools: fast-check (JS/TS), Hypothesis (Python), QuickCheck (Haskell/others).
+
+---
+
+## Test-Driven Development (TDD)
+
+**All features must follow Red-Green-Refactor. No exceptions.**
+
+You are NOT allowed to write implementation code for a new feature unless a failing test for that feature already exists in the repository.
+
+### Step 1 — Red: Write a Failing Test
+1. Read the requirement or acceptance criterion
+2. Create or open the test file for the feature
+3. Write one or more tests that describe the expected behaviour
+4. Verify the tests fail (because the implementation doesn't exist yet)
+5. **Commit:** `test: [task] - write failing tests for [feature]`
+
+### Step 2 — Green: Write Minimum Implementation
+1. Write the smallest amount of code that makes the tests pass
+2. Do not add anything beyond what the tests require
+3. Run the tests — confirm they all pass
+4. **Commit:** `feat: [task] - implement [feature] to pass tests`
+
+### Step 3 — Refactor: Clean Up (if needed)
+1. Improve code quality without changing behaviour
+2. Re-run tests after every refactor step — all must remain green
+3. **Commit:** `refactor: [task] - clean up [feature]` (only if refactor was non-trivial)
+
+### What counts as a "test"
+
+**Backend (Jest + Supertest)**
+- API route tests: POST/GET/PATCH endpoints via Supertest
+- DB persistence tests: verify the DB contains the correct values after an operation
+- Unit tests for utility functions (PIN hashing, token generation)
+
+**Frontend (Vitest)**
+- Component tests: render the component, assert DOM output
+- Composable tests: pure logic, no DOM needed
+- API layer tests: mock fetch, assert correct requests/responses
+
+### Test file naming & location
+- Backend: `backend/src/tests/[feature].test.js`
+- Frontend: `frontend/src/[component]/__tests__/[Component].test.ts`
+- One test file per feature/route — do not merge unrelated tests
+
+### What NOT to do
+- Do NOT write any `routes/*.js`, `*.vue`, or business logic before a failing test exists
+- Do NOT write "happy path only" — each test suite must include at least one error/edge case
+- Do NOT mock the database in backend integration tests — use real Supabase DB
+- Do NOT skip or comment out failing tests to make the suite green

@@ -7,6 +7,14 @@ Update enforced by `.claude/rules/changelog.md`.
 
 ## Changes
 
+### Claude config cleanup
+- **Time**: 2026-04-10
+- **Type**: chore
+- **Before**: `rules/tdd.md` existed as a separate file; `CLAUDE.md` referenced four framework-rule files including two that did not exist (`sqlite/rules.md`, `terraform/rules.md`); `tdd` was listed as a separate entry in the universal rules list
+- **After**: TDD content merged into `rules/testing-standards.md` as a final section (path frontmatter preserved); `rules/tdd.md` deleted; `CLAUDE.md` rule file list updated — removed `tdd` entry and the two non-existent framework-rule references
+
+---
+
 ### Task 7 — README
 - **Time:** 2026-04-10T12:35:00
 - **Type:** `docs`

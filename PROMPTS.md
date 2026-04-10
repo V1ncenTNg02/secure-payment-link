@@ -77,3 +77,11 @@ check the BRD file and the todo list in it, see if all of them are completed
 
 # Prompt 16:
 Delete the empty tests folder and add the last commit message to the prompts file
+
+# Prompt 17:
+help me remove the reference to those two files: framework-rules/sqlite/rules.md
+framework-rules/terraform/rules.md
+
+help me merge two overlapping testing files:
+rules/tdd.md and rules/testing-standards.md overlap.
+Both cover testing. TDD is a subset of testing standards. This should be one file with a TDD section, or clearly scoped so there's no contradiction between them.
