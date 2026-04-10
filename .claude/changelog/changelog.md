@@ -7,6 +7,15 @@ Update enforced by `.claude/rules/changelog.md`.
 
 ## Changes
 
+### Task 6 — Debug console logging and screenshot
+- **Time:** 2026-04-10T11:25:00
+- **Type:** `feat`
+- **Summary:**
+  - **Before:** `ClaimPaymentLink.vue` logged `{ token }` on claim — missing `claimedAt`. No `docs/debug-console.png`. No automated way to capture the screenshot.
+  - **After:** `ClaimPaymentLink.vue` now logs `{ token, claimedAt }` (ISO timestamp captured at claim time). `puppeteer-core` added to backend devDependencies. `backend/scripts/capture-debug-screenshot.js` starts both dev servers, exercises the full create→claim flow, captures both `[PaymentLink:create]` and `[PaymentLink:claim]` console.debug messages, injects a styled "DevTools console" panel into the DOM, and saves a screenshot to `docs/debug-console.png`. 22 backend + 38 frontend tests — all green (60 total).
+
+---
+
 ### Task 4 — Persistence verification tests
 - **Time:** 2026-04-10T11:45:00
 - **Type:** `test`

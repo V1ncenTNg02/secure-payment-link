@@ -31,8 +31,9 @@ async function onClaim() {
   isClaiming.value = true
   try {
     await claimPaymentLink(token, pin.value)
+    const claimedAt = new Date().toISOString()
     claimed.value = true
-    console.debug('[PaymentLink:claim]', { token })
+    console.debug('[PaymentLink:claim]', { token, claimedAt })
   } catch (err: unknown) {
     errorMessage.value = err instanceof Error ? err.message : 'Something went wrong'
   } finally {

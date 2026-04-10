@@ -7,6 +7,15 @@ Format enforced by `.claude/rules/changelog.md`.
 
 ## Changes
 
+### Task 6 — Debug console logging and screenshot
+- **Time:** 2026-04-10T11:25:00
+- **Type:** `feat`
+- **Summary:**
+  - **Before:** `ClaimPaymentLink.vue` debug log only had `{ token }` — missing `claimedAt` as required by BRD. No screenshot existed at `docs/debug-console.png`.
+  - **After:** `ClaimPaymentLink.vue` logs `{ token, claimedAt }` after a successful claim (ISO timestamp from `new Date().toISOString()`). `puppeteer-core` installed in backend devDependencies. `backend/scripts/capture-debug-screenshot.js` spins up both servers, runs the full create→claim browser flow, captures both `[PaymentLink:create]` and `[PaymentLink:claim]` debug outputs, injects a styled DevTools-style console panel, and saves `docs/debug-console.png`. Both logs captured: `[PaymentLink:create] {"token":...,"paymentType":"credit_card","amount":150,"currency":"AUD"}` and `[PaymentLink:claim] {"token":...,"claimedAt":"..."}`. 60 tests — all green.
+
+---
+
 ### Task 4 — Persistence verification tests
 - **Time:** 2026-04-10T11:45:00
 - **Type:** `test`
