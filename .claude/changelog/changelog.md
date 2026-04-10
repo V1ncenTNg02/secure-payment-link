@@ -7,6 +7,13 @@ Update enforced by `.claude/rules/changelog.md`.
 
 ## Changes
 
+### Task 7 — README
+- **Time:** 2026-04-10T12:35:00
+- **Type:** `docs`
+- **Summary:**
+  - **Before:** `README.md` contained only a single-line title stub.
+  - **After:** Full README covering: tech stack, prerequisites, project structure, setup (env vars, Supabase pooler), running frontend + backend, database migrations, running tests (frontend Vitest + backend Jest), full user flow (sender + recipient), error states table, supported regions table, API reference (all 3 endpoints with request/response shapes), security design table, and backend technology rationale (Node.js + Express vs FastAPI / Go / NestJS).
+
 ### Remove Apple Pay payment option
 - **Time:** 2026-04-10T12:19:50
 - **Type:** `feat`

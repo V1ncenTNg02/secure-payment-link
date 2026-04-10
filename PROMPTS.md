@@ -68,3 +68,6 @@ Remove the third payment option
 
 # Prompt 13:
 once the generate link button is clicked, show two options 1. Copy link 2. Send link to an email address, and put a email input field besides it. Once the send button is clicked, show: Link sent successfully! No need to implement the send functionality, just implement the UI.
+
+# Prompt 14:
+Help me do task 7
