@@ -16,8 +16,7 @@ const claimLimiter = rateLimit({
   message: { success: false, error: 'Too many requests — please try again later.' },
 })
 
-// Routes (added in later tasks)
-// app.use('/api/v1/payment-links', require('./routes/paymentLinks'))
+app.use('/api/v1/payment-links', require('./routes/paymentLinks'))
 
 app.get('/health', (_req, res) => {
   res.json({ success: true, data: { status: 'ok' } })

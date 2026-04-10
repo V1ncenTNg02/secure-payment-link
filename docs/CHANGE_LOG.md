@@ -7,6 +7,15 @@ Format enforced by `.claude/rules/changelog.md`.
 
 ## Changes
 
+### Task 3 — API create endpoint and frontend integration
+- **Time:** 2026-04-10T10:50:00
+- **Type:** `feat`
+- **Summary:**
+  - **Before:** No API route existed. "Generate Link" button had no action.
+  - **After:** `POST /api/v1/payment-links` validates body with Zod, generates UUID token, hashes PIN with SHA-256(pin+token), stores record in Supabase, returns `{ token, url }`. `pin_hash` is never returned. `frontend/src/api/paymentLinks.ts` calls the endpoint. `CreatePaymentLink.vue` wired to call API on submit, displays returned URL, shows loading/error states. `console.debug('[PaymentLink:create]', ...)` fires on success. 10 new tests (7 backend Supertest + 3 frontend Vitest) — all green. Total: 35 tests passing.
+
+---
+
 ### Task 2 — Backend scaffold and initial database migration
 - **Time:** 2026-04-10T10:45:00
 - **Type:** `feat`

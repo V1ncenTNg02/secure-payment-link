@@ -7,6 +7,24 @@ Update enforced by `.claude/rules/changelog.md`.
 
 ## Changes
 
+### Task 3 — API create endpoint and frontend integration
+- **Time:** 2026-04-10T10:50:00
+- **Type:** `feat`
+- **Summary:**
+  - **Before:** No `POST /api/v1/payment-links` route. "Generate Link" button had no action. No frontend API layer.
+  - **After:** Route validates body (Zod), generates UUID, hashes PIN with SHA-256(pin+token), persists to Supabase, returns `{ token, url }`. `frontend/src/api/paymentLinks.ts` created. `CreatePaymentLink.vue` calls API, shows URL/error/loading states. `console.debug` fires on success. 10 new tests — all green.
+
+---
+
+### Task 1 — Frontend UI
+- **Time:** 2026-04-10T10:00:00
+- **Type:** `feat`
+- **Summary:**
+  - **Before:** No frontend directory.
+  - **After:** Vue 3 + Vite + TypeScript in `frontend/`. Four components (LocaleSelector, PaymentMethodSelector, AmountInput, PinInput), CreatePaymentLink view, locales config. 20 Vitest tests, all green.
+
+---
+
 ### Sync docs and CLAUDE.md to reflect 6-digit PIN flow and TDD rule
 - **Time:** 2026-04-10T09:30:00
 - **Type:** `docs`
