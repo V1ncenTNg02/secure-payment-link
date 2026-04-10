@@ -7,6 +7,15 @@ Format enforced by `.claude/rules/changelog.md`.
 
 ## Changes
 
+### Task 4 — Persistence verification tests
+- **Time:** 2026-04-10T11:45:00
+- **Type:** `test`
+- **Summary:**
+  - **Before:** `migrate.test.js` had separate describe blocks each calling `pool.end()`, which caused a "Called end on pool more than once" error. No test verified that migration 002 applied correctly or that `claimed_at` defaults to `NULL`.
+  - **After:** `migrate.test.js` restructured into a single parent `Migrations` describe block with one `afterAll` pool teardown. Added `002_claim_tracking` nested describe with 3 tests: nullable `claimed_at` column exists, `claimed_at` is `NULL` for new rows, and `002_claim_tracking.sql` is tracked in `_migrations`. Existing AC-05 requirements were already met: `paymentLinks.test.js` test 3 asserts `payment_type`, `amount`, `currency` match stored values; `claim.test.js` asserts `claimed_at` is set after claiming. 22 backend + 38 frontend tests — all green (60 total).
+
+---
+
 ### Task 5 — Claim tracking: migration, API endpoints, and ClaimPaymentLink view
 - **Time:** 2026-04-10T11:30:00
 - **Type:** `feat`
