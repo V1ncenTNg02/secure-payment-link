@@ -57,7 +57,7 @@ cd backend && npm run test        # Jest + Supertest integration tests
 - Payment tokens: `crypto.randomUUID()` for link ID; sender-entered 6-digit PIN hashed with SHA-256 (token as salt) stored as `pin_hash`
 - Rate-limit claim endpoint: max 10 req/min per IP
 - Validate all user input server-side regardless of frontend validation
-- **MITM protection**: Sender enters a 6-digit numeric PIN when creating the link and communicates it to the recipient verbally over the phone. Claim requires PIN entry; backend hashes submitted PIN and compares with stored `pin_hash` (see ADR-006 in `docs/DECISIONS.md`)
+- **MITM protection**: Sender enters a 6-digit numeric PIN when creating the link and communicates it to the recipient verbally over the phone. Claim requires PIN entry; backend hashes submitted PIN and compares with stored `pin_hash` (see ADR-006 in `.claude/changelog/decisions.md`)
 
 ## Testing Conventions
 - Backend tests hit the real Supabase DB — no mocks for DB layer (migrations are idempotent, safe to re-run)
@@ -71,8 +71,8 @@ Rules are organized by scope under `.claude/`:
 - **Domain skills**: `.claude/skills/backend/security-review/SKILL.md` — PIN hashing, claim validation
 
 ## Mandatory Documentation (Enforced by Rules)
-- **Every code change** → append entry to `docs/CHANGE_LOG.md` (see `.claude/rules/changelog.md`)
-- **Every architectural decision** → append ADR entry to `docs/DECISIONS.md` (see `.claude/rules/decisions.md`)
+- **Every code change** → append entry to `.claude/changelog/changelog.md` (see `.claude/rules/changelog.md`)
+- **Every architectural decision** → append ADR entry to `.claude/changelog/decisions.md` (see `.claude/rules/decisions.md`)
 - Do not skip these steps. Do not batch them. Update immediately after the change.
 
 ## Important Gotchas
