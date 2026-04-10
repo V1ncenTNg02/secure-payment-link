@@ -71,3 +71,9 @@ once the generate link button is clicked, show two options 1. Copy link 2. Send 
 
 # Prompt 14:
 Help me do task 7
+
+# Prompt 15:
+check the BRD file and the todo list in it, see if all of them are completed
+
+# Prompt 16:
+Delete the empty tests folder and add the last commit message to the prompts file
