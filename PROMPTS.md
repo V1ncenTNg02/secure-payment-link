@@ -48,3 +48,7 @@ please help me to do the next task
 # Prompt 8:
 
 Please do task 5 first and then do task 4
+
+# Prompt 9:
+
+Do task 6 please

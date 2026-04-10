@@ -85,7 +85,6 @@ async function onGenerateLink() {
       <div class="field">
         <label>
           Security PIN
-          <span class="hint">— tell recipient by phone</span>
         </label>
         <PinInput v-model="pin" />
       </div>
