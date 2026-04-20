@@ -9,16 +9,15 @@ Built for the Unify Services developer test.
 ## Table of Contents
 
 1. [Tech Stack](#tech-stack)
-2. [Prerequisites](#prerequisites)
-3. [Project Structure](#project-structure)
-4. [Setup](#setup)
-5. [Running the App](#running-the-app)
-6. [Database Migrations](#database-migrations)
-7. [Running Tests](#running-tests)
-8. [How It Works](#how-it-works)
-9. [API Reference](#api-reference)
-10. [Security Design](#security-design)
-11. [Why Node.js + Express](#why-nodejs--express)
+2. [Project Structure](#project-structure)
+3. [Local Development Setup](#local-development-setup)
+4. [Running the App](#running-the-app)
+5. [Database Migrations](#database-migrations)
+6. [Running Tests](#running-tests)
+7. [How It Works](#how-it-works)
+8. [API Reference](#api-reference)
+9. [Security Design](#security-design)
+10. [Why Node.js + Express](#why-nodejs--express)
 
 ---
 
@@ -28,16 +27,9 @@ Built for the Unify Services developer test.
 |---|---|
 | Frontend | Vue 3 + Vite + TypeScript |
 | Backend | Node.js + Express |
-| Database | PostgreSQL via Supabase (transaction pooler) |
+| Database | PostgreSQL (Docker) |
 | Frontend tests | Vitest + Vue Test Utils |
 | Backend tests | Jest + Supertest |
-
----
-
-## Prerequisites
-
-- Node.js 18+
-- A [Supabase](https://supabase.com) project (free tier is sufficient)
 
 ---
 
@@ -68,27 +60,39 @@ secure-payment-link/
 
 ---
 
-## Setup
+## Local Development Setup
 
-### 1. Clone and install dependencies
+### Prerequisites
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- Node.js 18+
+
+### 1. Start the database
 
 ```bash
-# Frontend
-cd frontend && npm install
-
-# Backend
-cd backend && npm install
+docker compose up -d
 ```
 
-### 2. Configure environment variables
+### 2. Configure environment
 
-Create `backend/.env` (copy from `backend/.env.example`):
-
-```env
-DATABASE_URL=postgresql://postgres.[project-ref]:[password]@aws-0-[region].pooler.supabase.com:6543/postgres
+```bash
+cp backend/.env.example backend/.env
 ```
 
-> Use the **Transaction pooler** connection string from your Supabase project dashboard (Settings → Database → Connection pooling). Port **6543**, not 5432.
+### 3. Run migrations
+
+```bash
+cd backend && npm run migrate
+```
+
+### 4. Start the servers
+
+```bash
+# Backend (port 3000)
+cd backend && npm run dev
+
+# Frontend (port 5173)
+cd frontend && npm run dev
+```
 
 ---
 
@@ -148,7 +152,7 @@ npm run migrate   # ensure schema is up to date
 npm test
 ```
 
-Runs 22 integration tests covering the full API surface. Tests hit the real Supabase database — migrations are idempotent so re-runs are safe.
+Runs 22 integration tests covering the full API surface. Tests hit the real database — migrations are idempotent so re-runs are safe.
 
 ---
 
@@ -268,7 +272,7 @@ All endpoints are prefixed with `/api/v1/payment-links`.
 | MITM protection | URL and PIN travel over separate channels (URL via message, PIN verbally) |
 | SQL injection | Parameterised queries only — no string concatenation |
 | Information leakage | `pin_hash` is excluded from all API responses; errors are generic |
-| Transport | HTTPS in production; `ssl: { rejectUnauthorized: false }` for Supabase pooler |
+| Transport | HTTPS in production; TLS for remote database connections |
 
 ---
 
