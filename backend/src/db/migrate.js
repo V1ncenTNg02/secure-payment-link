@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-require('dotenv').config({ path: path.join(__dirname, '../../../.env') })
+require('dotenv').config({ path: path.join(__dirname, '../../.env') })
 const { pool } = require('./index')
 
 const MIGRATIONS_DIR = path.join(__dirname, 'migrations')

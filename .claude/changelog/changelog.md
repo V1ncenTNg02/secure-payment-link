@@ -7,6 +7,13 @@ Update enforced by `.claude/rules/changelog.md`.
 
 ## Changes
 
+### Task 3 (Docker migration) — dotenv paths updated to backend/.env, Supabase SSL removed
+- **Time:** 2026-04-20T00:00:00
+- **Type:** `refactor`
+- **Summary:**
+  - **Before:** `backend/src/db/index.js` loaded `../../../.env` (repo root, Supabase) and had `ssl: { rejectUnauthorized: false }`. `backend/src/db/migrate.js` also loaded `../../../.env`. `backend/src/server.js` loaded `../../.env` (repo root). `backend/src/tests/setup.js` loaded `../../../.env`.
+  - **After:** All four files now load `../../.env` (or `../.env` for `server.js`) resolving to `backend/.env` — the local Docker Postgres `.env`. SSL config removed from the Pool since local Docker Postgres does not require SSL. `backend/.env` copied from `backend/.env.example` (`DATABASE_URL=postgresql://postgres:postgres@localhost:5432/payment_link`).
+
 ### Claude config cleanup
 - **Time**: 2026-04-10
 - **Type**: chore
