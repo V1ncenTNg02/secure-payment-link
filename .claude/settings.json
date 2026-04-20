@@ -1,5 +1,21 @@
 {
   "permissions": {
+    "allow": [
+      "Read(//c/Users/wuyin/.claude/plugins/cache/superpowers-dev/superpowers/5.0.7/skills/subagent-driven-development/**)",
+      "Bash(docker compose *)",
+      "Bash(powershell.exe -Command \"Start-Process 'C:\\\\\\\\Program Files\\\\\\\\Docker\\\\\\\\Docker\\\\\\\\Docker Desktop.exe' -ErrorAction SilentlyContinue; Start-Sleep 2; Write-Output 'Docker Desktop launch attempted'\")",
+      "Bash(docker exec *)",
+      "Bash(git -C /e/GitProject/secure-payment-link add docker-compose.yml)",
+      "Bash(git -C /e/GitProject/secure-payment-link commit -m ' *)",
+      "Bash(git -C /e/GitProject/secure-payment-link status)",
+      "Bash(git rm *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git reset *)",
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:3000/health)",
+      "Bash(kill %1)"
+    ],
     "allowlist": [
       "Bash(npm run *)",
       "Bash(npx *)",

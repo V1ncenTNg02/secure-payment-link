@@ -2,7 +2,7 @@
 .env
 .env.*
 !.env.example
-!backend/.env.example
+
 
 # Dependencies
 node_modules/
@@ -10,8 +10,6 @@ node_modules/
 # Build output
 frontend/dist/
 
-# Database
-backend/db/*.db
 
 # Editor
 .DS_Store
